@@ -1,14 +1,18 @@
-package GameOfLife;
-
+package gameOfLife;
 
 import javafx.scene.layout.GridPane;
 
 public class BoardView extends GridPane {
 
+    private Board gameBoard;
 
     public BoardView(Board gameBoard) {
         this.setHgap(1.0);
         this.setVgap(1.0);
+        this.gameBoard = gameBoard;
+    }
+
+    public void render() {
 
         this.getChildren().clear();
 
@@ -19,3 +23,4 @@ public class BoardView extends GridPane {
         }
     }
 }
+

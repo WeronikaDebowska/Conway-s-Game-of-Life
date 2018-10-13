@@ -1,4 +1,4 @@
-package GameOfLife;
+package gameOfLife;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,10 +14,11 @@ public class Main extends Application {
 
 
         Board gameBoard = new Board(10,10);
-
-        Game game = new Game(gameBoard);
         BoardView gameBoardView = new BoardView(gameBoard);
-        game.start();
+        gameBoardView.render();
+        Game game = new Game(gameBoard);
+        GameLoop gameLoop = new GameLoop(gameBoard, gameBoardView, game);
+        gameLoop.start();
 
         Scene scene = new Scene(gameBoardView, WIDTH,HEIGHT);
 

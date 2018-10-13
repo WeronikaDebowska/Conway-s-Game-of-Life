@@ -1,5 +1,4 @@
-package GameOfLife;
-
+package gameOfLife;
 
 public class Board  {
 
@@ -11,15 +10,20 @@ public class Board  {
     public Board(int width, int height) {
 
         this.width = width;
-        this.height = height ;
-
+        this.height = height;
         gameBoard = new Cell[width][height];
+        createBoard();
+    }
 
+    private void createBoard() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 gameBoard[i][j] = new Cell();
             }
         }
+
+        gameBoard[2][2].setCellAlive();
+        gameBoard[2][3].setCellAlive();
         gameBoard[2][4].setCellAlive();
         gameBoard[3][2].setCellAlive();
         gameBoard[3][4].setCellAlive();
