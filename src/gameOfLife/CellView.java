@@ -10,7 +10,8 @@ public class CellView extends Rectangle {
     private final double SIZE = 10;
     private Cell cell;
     private EventHandler<MouseEvent> eventHandler = event -> {
-        cell.setIsAlive(!cell.getIsAlive());
+        cell.changeState();
+        updateCellColor(cell);
         System.out.println("clicked");
     };
 
@@ -27,7 +28,7 @@ public class CellView extends Rectangle {
     }
 
     private void updateCellColor(Cell cell) {
-        this.setFill((!cell.getIsAlive()) ? Color.CADETBLUE : Color.WHITE);
+        this.setFill((cell.getActualCellState().equals(CellState.ALIVE)) ? Color.WHITE : Color.CADETBLUE);
     }
 
 }

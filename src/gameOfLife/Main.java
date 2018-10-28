@@ -9,18 +9,16 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        final int WIDTH = 1400;
-        final int HEIGHT = 800;
+        final int WIDTH = 1400;             //window width
+        final int HEIGHT = 800;             //window height
 
 
-        Board gameBoard = new Board(10,10);
+        BoardCreator gameBoard = new BoardCreator(140, 80);
         BoardView gameBoardView = new BoardView(gameBoard);
-        gameBoardView.render();
         Game game = new Game(gameBoard);
-        GameLoop gameLoop = new GameLoop(gameBoard, gameBoardView, game);
+        Scene scene = new Renderer().renderBoard(gameBoardView);
+        GameLoop gameLoop = new GameLoop(game, primaryStage);
         gameLoop.start();
-
-        Scene scene = new Scene(gameBoardView, WIDTH,HEIGHT);
 
         primaryStage.setTitle("Game Of Life");
         primaryStage.setScene(scene);

@@ -1,30 +1,52 @@
 package gameOfLife;
 
-public class Cell {
+import java.util.Observable;
+import java.util.Observer;
 
-    private boolean isAlive;
+public class Cell extends Observable implements Observer {
 
-    public void setIsAlive(boolean alive) {
-        isAlive = alive;
-    }
+//    private boolean isAlive;
 
-    public void killCell(){ this.setIsAlive(false);
+    private CellState actualCellState;
+    private CellState futureCellState;
+    private Game game;
+//    private Cell[] neighbours;
 
-    }
-
-    public boolean getIsAlive() {
-        return isAlive;
-    }
-
-    public void setCellAlive() {
-        this.setIsAlive(true);
-    }
-
-    public Cell () {
-        this.isAlive = false;
+    public Cell() {
+        this.actualCellState = CellState.DEAD;
 
     }
 
+    public CellState getActualCellState() {
+        return actualCellState;
+    }
+
+    public void setActualCellState(CellState actualCellState) {
+        this.actualCellState = actualCellState;
+        this.futureCellState = actualCellState;
+    }
+
+    void changeState() {
+        if (actualCellState == CellState.DEAD) {
+            futureCellState = CellState.ALIVE;
+        } else {
+            futureCellState = CellState.DEAD;
+        }
+        setChanged();
+        notifyObservers();
+        clearChanged();
+    }
+
+    private boolean shouldChangeState() {
+        return true;
+    }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("OBS");
+        if (shouldChangeState()) {
+            changeState();
+        }
+    }
 }
