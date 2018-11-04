@@ -22,16 +22,16 @@ public class Cell extends Observable implements Observer {
         return actualCellState;
     }
 
+    public void setActualCellState(CellState actualCellState) {
+        this.actualCellState = actualCellState;
+    }
+
     public CellState getFutureCellState() {
         return futureCellState;
     }
 
     public void setFutureCellState(CellState futureCellState) {
         this.futureCellState = futureCellState;
-    }
-
-    public void setActualCellState(CellState actualCellState) {
-        this.actualCellState = actualCellState;
     }
 
     public void changeActualState() {
