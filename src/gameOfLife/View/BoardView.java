@@ -33,12 +33,6 @@ public class BoardView extends GridPane {
                 this.getChildren().addAll(cellView);
             }
         }
-
-
-    }
-
-    public BoardCreator getGameBoard() {
-        return gameBoard;
     }
 }
 

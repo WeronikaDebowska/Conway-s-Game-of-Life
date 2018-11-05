@@ -42,23 +42,19 @@ class GameLoop {
     }
 
     private void changePeriod(int diff) {
-        if ((diff > 0) || (diff < 0 && currentPeriod >= diff)) {
+        if (currentPeriod + diff > 0) {
             changedPeriod = currentPeriod + diff;
         }
     }
 
     void speedUp() {
-        setGamePaused(true);
         changePeriod(-periodDiff);
         actualizeGameTempo();
-        setGamePaused(false);
     }
 
     void slowDown() {
-        setGamePaused(true);
         changePeriod(periodDiff);
         actualizeGameTempo();
-        setGamePaused(false);
     }
 
     public void updateGame() {
@@ -84,5 +80,3 @@ class GameLoop {
     }
 
 }
-
-      

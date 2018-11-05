@@ -1,8 +1,5 @@
 package gameOfLife.Controller;
 
-import gameOfLife.Controller.Game;
-import gameOfLife.Controller.GameLoop;
-import gameOfLife.Controller.KeyControls;
 import gameOfLife.Model.BoardCreator;
 import gameOfLife.View.BoardView;
 import javafx.application.Application;
@@ -21,8 +18,11 @@ public class Main extends Application {
         final int WIDTH = 1400;             //window width
         final int HEIGHT = 800;             //window height
 
+        final int NUMBER_OF_ROWS = 40;
+        final int NUMBER_OF_COLUMNS = 40;
 
-        BoardCreator initialBoard = new BoardCreator(40, 40);
+
+        BoardCreator initialBoard = new BoardCreator(NUMBER_OF_COLUMNS, NUMBER_OF_ROWS);
         BoardView initialBoardView = new BoardView(initialBoard);
         Game game = new Game(initialBoard);
         Scene scene = new Scene(initialBoardView, WIDTH, HEIGHT);
