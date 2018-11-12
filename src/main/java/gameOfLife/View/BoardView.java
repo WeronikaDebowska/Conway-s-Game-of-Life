@@ -1,6 +1,6 @@
-package gameOfLife.View;
+package main.java.gameOfLife.View;
 
-import gameOfLife.Model.BoardCreator;
+import main.java.gameOfLife.Model.BoardCreator;
 import javafx.scene.layout.GridPane;
 
 public class BoardView extends GridPane {

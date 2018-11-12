@@ -1,6 +1,5 @@
-package gameOfLife.Controller;
+package main.java.gameOfLife.Controller;
 
-import gameOfLife.Controller.GameLoop;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 

@@ -1,8 +1,7 @@
-package gameOfLife.Controller;
+package main.java.gameOfLife.Controller;
 
-import gameOfLife.Controller.Game;
-import gameOfLife.Model.BoardCreator;
-import gameOfLife.View.BoardView;
+import main.java.gameOfLife.Model.BoardCreator;
+import main.java.gameOfLife.View.BoardView;
 import javafx.scene.Scene;
 
 import java.util.concurrent.Executors;

@@ -1,7 +1,7 @@
-package gameOfLife.View;
+package main.java.gameOfLife.View;
 
-import gameOfLife.Model.Cell;
-import gameOfLife.Model.CellState;
+import main.java.gameOfLife.Model.Cell;
+import main.java.gameOfLife.Model.CellState;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 

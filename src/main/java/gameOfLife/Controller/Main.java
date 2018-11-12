@@ -1,7 +1,7 @@
-package gameOfLife.Controller;
+package main.java.gameOfLife.Controller;
 
-import gameOfLife.Model.BoardCreator;
-import gameOfLife.View.BoardView;
+import main.java.gameOfLife.Model.BoardCreator;
+import main.java.gameOfLife.View.BoardView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -18,8 +18,8 @@ public class Main extends Application {
         final int WIDTH = 1400;             //window width
         final int HEIGHT = 800;             //window height
 
-        final int NUMBER_OF_ROWS = 40;
-        final int NUMBER_OF_COLUMNS = 40;
+        final int NUMBER_OF_ROWS = 50;
+        final int NUMBER_OF_COLUMNS = 70;
 
 
         BoardCreator initialBoard = new BoardCreator(NUMBER_OF_COLUMNS, NUMBER_OF_ROWS);

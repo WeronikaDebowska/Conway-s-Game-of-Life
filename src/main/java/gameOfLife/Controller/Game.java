@@ -1,15 +1,15 @@
-package gameOfLife.Controller;
+package main.java.gameOfLife.Controller;
 
-import gameOfLife.Model.BoardCreator;
-import gameOfLife.Model.Cell;
-import gameOfLife.Model.CellState;
+import main.java.gameOfLife.Model.BoardCreator;
+import main.java.gameOfLife.Model.Cell;
+import main.java.gameOfLife.Model.CellState;
 
-class Game {
+public class Game {
 
     private BoardCreator currentGeneration;
     private Cell[] neighbours = new Cell[8];
 
-    Game(BoardCreator currentGeneration) {
+    public Game(BoardCreator currentGeneration) {
         this.currentGeneration = currentGeneration;
     }
 
@@ -51,22 +51,28 @@ class Game {
         }
     }
 
-    BoardCreator playGame() {
-
-        BoardCreator nextGeneration;
-        nextGeneration = new BoardCreator(currentGeneration.getCellHorizontally(), currentGeneration.getCellVertically());
+    public BoardCreator playGame() {
 
         for (int i = currentGeneration.getPadding(); i < currentGeneration.getGameBoard().length - currentGeneration.getPadding(); i++) {
             for (int j = currentGeneration.getPadding(); j < currentGeneration.getGameBoard()[i].length - currentGeneration.getPadding(); j++) {
 
                 updateCellStatus(i, j);
-
-                nextGeneration.getGameBoard()[i][j].setActualCellState(currentGeneration.getGameBoard()[i][j].getFutureCellState());
-                nextGeneration.getGameBoard()[i][j].setFutureCellState(CellState.DEAD);
             }
         }
-        currentGeneration.setGameBoard(nextGeneration.getGameBoard());
-        return nextGeneration;
+
+        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGameBoard().length - currentGeneration.getPadding(); i++) {
+            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGameBoard()[i].length - currentGeneration.getPadding(); j++) {
+
+//                System.out.println(i + " " + j + " " + currentGeneration.getGameBoard()[i][j].getActualCellState());
+                currentGeneration.getGameBoard()[i][j].setActualCellState(currentGeneration.getGameBoard()[i][j].getFutureCellState());
+                currentGeneration.getGameBoard()[i][j].setFutureCellState(CellState.DEAD);
+
+
+            }
+        }
+//        System.out.println("+++++++++++++++++++++++++++++++++++++++");
+
+        return currentGeneration;
     }
 
 

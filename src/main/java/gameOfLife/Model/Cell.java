@@ -1,4 +1,4 @@
-package gameOfLife.Model;
+package main.java.gameOfLife.Model;
 
 public class Cell {
 
