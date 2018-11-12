@@ -17,16 +17,16 @@ public class Tests {
         //create 7x7 board to test on
         BoardCreator testingBoard = new BoardCreator(7, 7);
 
-        testingBoard.getGameBoard()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
 
         //perform next generation
         Game game = new Game(testingBoard);
         game.playGame();
 
         //check if both cells are dead
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[2][1].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[3][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[2][1].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[3][2].getActualCellState());
 
     }
 
@@ -37,19 +37,19 @@ public class Tests {
         //create 7x7 board to test on
         BoardCreator testingBoard = new BoardCreator(7, 7);
 
-        testingBoard.getGameBoard()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
 
         //perform next generation
         Game game = new Game(testingBoard);
         game.playGame();
 
         //check if both cells are dead
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][2].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][2].getActualCellState());
 
     }
 
@@ -60,11 +60,11 @@ public class Tests {
         //create 7x7 board to test on
         BoardCreator testingBoard = new BoardCreator(7, 7);
 
-        testingBoard.getGameBoard()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][2].setActualCellState(CellState.ALIVE);      // the cell should die
-        testingBoard.getGameBoard()[4][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][3].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);      // the cell should die
+        testingBoard.getGeneration()[4][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][3].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
 
 
         //perform next generation
@@ -72,7 +72,7 @@ public class Tests {
         game.playGame();
 
         //check if both cells are dead
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[3][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[3][2].getActualCellState());
 
     }
 
@@ -84,17 +84,17 @@ public class Tests {
         //create 7x7 board to test on
         BoardCreator testingBoard = new BoardCreator(7, 7);
 
-        testingBoard.getGameBoard()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][2].setActualCellState(CellState.DEAD);      // the cell become alive
-        testingBoard.getGameBoard()[4][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][3].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][2].setActualCellState(CellState.DEAD);      // the cell become alive
+        testingBoard.getGeneration()[4][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][3].setActualCellState(CellState.ALIVE);
 
         //perform next generation
         Game game = new Game(testingBoard);
         game.playGame();
 
         //check if both cells are dead
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][2].getActualCellState());
 
 
     }
@@ -110,27 +110,27 @@ public class Tests {
 
         //set blinker pattern i.e. 3 cells in a row alive
 
-        testingBoard.getGameBoard()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[2][3].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][3].setActualCellState(CellState.ALIVE);
 
         //perform next generation
         Game game = new Game(testingBoard);
         game.playGame();
 
         //check if pattern is ok in next generation i.e 3 cells vertically alive
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[1][2].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[2][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][2].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[2][3].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[1][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[2][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[2][3].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][2].getActualCellState());
 
         game.playGame();
 
         //check if pattern is ok after 2 generations i.e 3 cells horizontally alive
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][2].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][3].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][3].getActualCellState());
 
 
     }
@@ -143,35 +143,35 @@ public class Tests {
 
         //set block pattern i.e. 4 cells in square's corners alive
 
-        testingBoard.getGameBoard()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGameBoard()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
 
         //perform next generation
         Game game = new Game(testingBoard);
         game.playGame();
 
         //check if pattern is ok i.e 3 cells vertically alive
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[2][2].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][1].getActualCellState());
-        assertEquals(CellState.ALIVE, testingBoard.getGameBoard()[3][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[2][2].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][1].getActualCellState());
+        assertEquals(CellState.ALIVE, testingBoard.getGeneration()[3][2].getActualCellState());
 
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[1][0].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[1][1].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[1][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[1][0].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[1][1].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[1][2].getActualCellState());
 
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[2][0].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[2][3].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[2][0].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[2][3].getActualCellState());
 
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[3][0].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[3][3].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[3][0].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[3][3].getActualCellState());
 
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[4][1].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[4][2].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[4][1].getActualCellState());
-        assertEquals(CellState.DEAD, testingBoard.getGameBoard()[4][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[4][1].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[4][2].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[4][1].getActualCellState());
+        assertEquals(CellState.DEAD, testingBoard.getGeneration()[4][2].getActualCellState());
 
     }
 

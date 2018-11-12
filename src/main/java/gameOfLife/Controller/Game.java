@@ -18,7 +18,7 @@ public class Game {
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (!(i == 0 && j == 0)) {
-                    neighbours[index] = currentGeneration.getGameBoard()[cellCoX + i][cellCoY + j];
+                    neighbours[index] = currentGeneration.getGeneration()[cellCoX + i][cellCoY + j];
                     index++;
                 }
             }
@@ -29,7 +29,7 @@ public class Game {
     private void updateCellStatus(int cellCoX, int cellCoY) {
 
         Cell[] neighbours = findNeighbours(cellCoX, cellCoY);
-        Cell cell = currentGeneration.getGameBoard()[cellCoX][cellCoY];
+        Cell cell = currentGeneration.getGeneration()[cellCoX][cellCoY];
 
         boolean cellIsAlive = cell.getActualCellState().equals(CellState.ALIVE);
         int aliveNeighboursCount = 0;
@@ -53,19 +53,19 @@ public class Game {
 
     public BoardCreator playGame() {
 
-        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGameBoard().length - currentGeneration.getPadding(); i++) {
-            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGameBoard()[i].length - currentGeneration.getPadding(); j++) {
+        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
+            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
 
                 updateCellStatus(i, j);
             }
         }
 
-        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGameBoard().length - currentGeneration.getPadding(); i++) {
-            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGameBoard()[i].length - currentGeneration.getPadding(); j++) {
+        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
+            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
 
-//                System.out.println(i + " " + j + " " + currentGeneration.getGameBoard()[i][j].getActualCellState());
-                currentGeneration.getGameBoard()[i][j].setActualCellState(currentGeneration.getGameBoard()[i][j].getFutureCellState());
-                currentGeneration.getGameBoard()[i][j].setFutureCellState(CellState.DEAD);
+//                System.out.println(i + " " + j + " " + currentGeneration.getGeneration()[i][j].getActualCellState());
+                currentGeneration.getGeneration()[i][j].setActualCellState(currentGeneration.getGeneration()[i][j].getFutureCellState());
+                currentGeneration.getGeneration()[i][j].setFutureCellState(CellState.DEAD);
 
 
             }

@@ -3,7 +3,7 @@ package main.java.gameOfLife.Model;
 public class BoardCreator {
 
     private int cellVertically;
-    private Cell[][] gameBoard;
+    private Cell[][] generation;
     private int cellHorizontally;
 
     public BoardCreator(int cellHorizontally, int cellVertically) {
@@ -11,24 +11,20 @@ public class BoardCreator {
         this.cellHorizontally = cellHorizontally;
         this.cellVertically = cellVertically;
 
-        gameBoard = new Cell[cellHorizontally][cellVertically];
+        generation = new Cell[cellHorizontally][cellVertically];
         createBoard();
     }
 
     private void createBoard() {
         for (int i = 0; i < cellHorizontally; i++) {
             for (int j = 0; j < cellVertically; j++) {
-                gameBoard[i][j] = new Cell();
+                generation[i][j] = new Cell();
             }
         }
     }
 
-    public Cell[][] getGameBoard() {
-        return gameBoard;
-    }
-
-    public void setGameBoard(Cell[][] gameBoard) {
-        this.gameBoard = gameBoard;
+    public Cell[][] getGeneration() {
+        return generation;
     }
 
     public int getCellHorizontally() {

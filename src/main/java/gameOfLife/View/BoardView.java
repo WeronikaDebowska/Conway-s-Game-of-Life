@@ -25,7 +25,7 @@ public class BoardView extends GridPane {
         for (int i = gameBoard.getPadding(); i < numberOfRows - gameBoard.getPadding(); i++) {
             for (int j = gameBoard.getPadding(); j < numberOfColumns - gameBoard.getPadding(); j++) {
 
-                CellView cellView = new CellView(gameBoard.getGameBoard()[i][j]);
+                CellView cellView = new CellView(gameBoard.getGeneration()[i][j]);
 
                 GridPane.setColumnIndex(cellView, i);
                 GridPane.setRowIndex(cellView, j);
