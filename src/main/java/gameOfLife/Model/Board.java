@@ -2,23 +2,23 @@ package gameOfLife.Model;
 
 public class Board {
 
-    private int cellVertically;
-    private int cellHorizontally;
+    private int numberOfRows;
+    private int numberOfColumns;
     private Cell[][] generation;
 
-    public Board(int cellHorizontally, int cellVertically) {
+    public Board(int numberOfRows, int numberOfColumns) {
 
-        this.cellHorizontally = cellHorizontally;
-        this.cellVertically = cellVertically;
+        this.numberOfRows = numberOfRows;
+        this.numberOfColumns = numberOfColumns;
 
-        generation = new Cell[cellHorizontally][cellVertically];
+        generation = new Cell[numberOfRows][numberOfColumns];
         createBoard();
     }
 
     private void createBoard() {
-        for (int column = 0; column < cellHorizontally; column++) {
-            for (int row = 0; row < cellVertically; row++) {
-                generation[column][row] = new Cell();
+        for (int row = 0; row < numberOfRows; row++) {
+            for (int column = 0; column < numberOfColumns; column++) {
+                generation[row][column] = new Cell();
             }
         }
     }
@@ -27,16 +27,15 @@ public class Board {
         return generation;
     }
 
-    public int getCellHorizontally() {
-        return cellHorizontally;
+    public int getNumberOfColumns() {
+        return numberOfColumns;
     }
 
-    public int getCellVertically() {
-        return cellVertically;
+    public int getNumberOfRows() {
+        return numberOfRows;
     }
 
-    public int getPadding() {
-        int padding = 1;
-        return padding;
+    public Cell getCell(int column, int row) {
+        return generation[column][row];
     }
 }

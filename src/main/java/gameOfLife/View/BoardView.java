@@ -18,18 +18,18 @@ public class BoardView extends GridPane {
 
         this.getChildren().clear();
 
-        int numberOfColumns = gameBoard.getCellHorizontally();
-        int numberOfRows = gameBoard.getCellVertically();
+        int numberOfRows = gameBoard.getNumberOfRows();
+        int numberOfColumns = gameBoard.getNumberOfColumns();
 
-        int padding = gameBoard.getPadding();
+        final int PADDING = 2;  //size of invisible rows and columns od board
 
-        for (int i = padding; i < numberOfColumns - padding; i++) {
-            for (int j = padding; j < numberOfRows - padding; j++) {
+        for (int row = PADDING; row < numberOfRows - PADDING; row++) {
+            for (int column = PADDING; column < numberOfColumns - PADDING; column++) {
 
-                CellView cellView = new CellView(gameBoard.getGeneration()[i][j]);
+                CellView cellView = new CellView(gameBoard.getGeneration()[row][column]);
 
-                GridPane.setColumnIndex(cellView, i);
-                GridPane.setRowIndex(cellView, j);
+                GridPane.setColumnIndex(cellView, column);
+                GridPane.setRowIndex(cellView, row);
 
                 this.getChildren().addAll(cellView);
             }

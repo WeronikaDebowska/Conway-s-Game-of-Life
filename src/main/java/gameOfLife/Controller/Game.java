@@ -7,53 +7,56 @@ import gameOfLife.Model.CellState;
 public class Game {
 
     private Board currentGeneration;
-    private Cell[] neighbours = new Cell[8];
+
+    private int numberOfRows;
+    private int numberOfColumns;
 
 
-    public Game(Board currentGeneration) {
-        this.currentGeneration = currentGeneration;
+    public Game(Board generation) {
+        currentGeneration = generation;
+        numberOfRows = currentGeneration.getNumberOfRows();
+        numberOfColumns = currentGeneration.getNumberOfColumns();
         findAllCellsNeighbours();
     }
 
     private void findAllCellsNeighbours() {
-        for (int column = 1; column < currentGeneration.getGeneration().length - 1; column++) {
-            for (int row = 1; row < currentGeneration.getGeneration()[column].length - 1; row++) {
-                findCellsNeighbours(column, row);
+
+        for (int row = 1; row < numberOfRows - 1; row++) {
+            for (int column = 1; column < numberOfColumns - 1; column++) {
+                findCellsNeighbours(row, column);
             }
         }
     }
 
-    private void findCellsNeighbours(int column, int row) {
-        getCell(column, row).setNeighbours(new Cell[]{
-                getCell(column - 1, row - 1), getCell(column - 1, row), getCell(column - 1, row + 1),
-                getCell(column, row - 1), getCell(column, row + 1),
-                getCell(column + 1, row - 1), getCell(column + 1, row), getCell(column + 1, row + 1)
+    private void findCellsNeighbours(int row, int column) {
+        getCell(row, column).setNeighbours(new Cell[]{
+                getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
+                getCell(row, column - 1), getCell(row, column + 1),
+                getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
         });
     }
 
 
     public Board playGame() {
 
-        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
-            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
-                getCell(i, j).setFutureCellState();
+        for (int row = 1; row < numberOfRows - 1; row++) {      //omitting edges
+            for (int column = 1; column < numberOfColumns - 1; column++) {
+                getCell(row, column).setFutureCellState();
             }
         }
 
-        for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
-            for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
+        for (int row = 1; row < numberOfRows - 1; row++) {
+            for (int column = 1; column < numberOfColumns - 1; column++) {
 
-                getCell(i, j).setActualCellState(currentGeneration.getGeneration()[i][j].getFutureCellState());
-                getCell(i, j).setFutureCellState(CellState.DEAD);
+                getCell(row, column).setActualCellState(getCell(row, column).getFutureCellState());
+                getCell(row, column).setFutureCellState(CellState.DEAD);
             }
         }
-
-
         return currentGeneration;
     }
 
-    private Cell getCell(int column, int row) {
-        return currentGeneration.getGeneration()[column][row];
+    private Cell getCell(int row, int column) {
+        return currentGeneration.getCell(row, column);
     }
 
 }
