@@ -1,7 +1,7 @@
-package main.java.gameOfLife.Controller;
+package gameOfLife.Controller;
 
-import main.java.gameOfLife.Model.BoardCreator;
-import main.java.gameOfLife.View.BoardView;
+import gameOfLife.Model.Board;
+import gameOfLife.View.BoardView;
 import javafx.scene.Scene;
 
 import java.util.concurrent.Executors;
@@ -10,7 +10,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-class GameLoop {
+public class GameLoop {
 
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(5);
@@ -23,7 +23,7 @@ class GameLoop {
     private int delay;
     private ScheduledFuture<?> gameUpdating;
 
-    GameLoop(Game game, Scene scene) {
+    public GameLoop(Game game, Scene scene) {
         this.game = game;
         this.scene = scene;
         isGamePaused = true;
@@ -63,7 +63,7 @@ class GameLoop {
                 if (isGamePaused) {
                     return;
                 }
-                BoardCreator nextGeneration = game.playGame();
+                Board nextGeneration = game.playGame();
                 scene.setRoot(new BoardView(nextGeneration));
             }
         };

@@ -1,4 +1,4 @@
-package main.java.gameOfLife.Controller;
+package gameOfLife.Controller;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -9,7 +9,7 @@ public class KeyControls {
     private GameLoop gameLoop;
 
 
-    KeyControls(GameLoop gameLoop, Scene scene) {
+    public KeyControls(GameLoop gameLoop, Scene scene) {
         this.gameLoop = gameLoop;
         this.SCENE = scene;
         setKeysControls(gameLoop);

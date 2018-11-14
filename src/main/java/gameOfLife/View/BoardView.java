@@ -1,13 +1,13 @@
-package main.java.gameOfLife.View;
+package gameOfLife.View;
 
-import main.java.gameOfLife.Model.BoardCreator;
+import gameOfLife.Model.Board;
 import javafx.scene.layout.GridPane;
 
 public class BoardView extends GridPane {
 
-    private BoardCreator gameBoard;
+    private Board gameBoard;
 
-    public BoardView(BoardCreator gameBoard) {
+    public BoardView(Board gameBoard) {
         this.setHgap(1.0);
         this.setVgap(1.0);
         this.gameBoard = gameBoard;
@@ -18,12 +18,13 @@ public class BoardView extends GridPane {
 
         this.getChildren().clear();
 
-        int numberOfRows = gameBoard.getCellHorizontally();
-        int numberOfColumns = gameBoard.getCellVertically();
+        int numberOfColumns = gameBoard.getCellHorizontally();
+        int numberOfRows = gameBoard.getCellVertically();
 
+        int padding = gameBoard.getPadding();
 
-        for (int i = gameBoard.getPadding(); i < numberOfRows - gameBoard.getPadding(); i++) {
-            for (int j = gameBoard.getPadding(); j < numberOfColumns - gameBoard.getPadding(); j++) {
+        for (int i = padding; i < numberOfColumns - padding; i++) {
+            for (int j = padding; j < numberOfRows - padding; j++) {
 
                 CellView cellView = new CellView(gameBoard.getGeneration()[i][j]);
 

@@ -1,7 +1,7 @@
-package test.java.gameOfLife;
+package gameOfLife.controller;
 
-import main.java.gameOfLife.Controller.*;
-import main.java.gameOfLife.Model.*;
+import gameOfLife.Controller.Game;
+import gameOfLife.Model.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ public class Tests {
     void willAliveCellDieInUnderpopulationArea() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
         testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
@@ -35,7 +35,7 @@ public class Tests {
     void willAliveCellSurviveNextToTwoOrThreeAliveNeighbours() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
         testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
@@ -58,7 +58,7 @@ public class Tests {
     void willAliveCellDieInOverpopulatedArea() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
         testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);      // the cell should die
@@ -82,7 +82,7 @@ public class Tests {
     void willDeadCellBecomeAliveNextToThreeAliveNeighbours() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
         testingBoard.getGeneration()[3][2].setActualCellState(CellState.DEAD);      // the cell become alive
@@ -106,7 +106,7 @@ public class Tests {
     void isBlinkerPatternWorking() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         //set blinker pattern i.e. 3 cells in a row alive
 
@@ -139,7 +139,7 @@ public class Tests {
     void isBlockPatternWorking() {
 
         //create 7x7 board to test on
-        BoardCreator testingBoard = new BoardCreator(7, 7);
+        Board testingBoard = new Board(7, 7);
 
         //set block pattern i.e. 4 cells in square's corners alive
 

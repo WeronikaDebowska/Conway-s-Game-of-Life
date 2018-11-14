@@ -1,12 +1,12 @@
-package main.java.gameOfLife.Model;
+package gameOfLife.Model;
 
-public class BoardCreator {
+public class Board {
 
     private int cellVertically;
-    private Cell[][] generation;
     private int cellHorizontally;
+    private Cell[][] generation;
 
-    public BoardCreator(int cellHorizontally, int cellVertically) {
+    public Board(int cellHorizontally, int cellVertically) {
 
         this.cellHorizontally = cellHorizontally;
         this.cellVertically = cellVertically;
@@ -16,9 +16,9 @@ public class BoardCreator {
     }
 
     private void createBoard() {
-        for (int i = 0; i < cellHorizontally; i++) {
-            for (int j = 0; j < cellVertically; j++) {
-                generation[i][j] = new Cell();
+        for (int column = 0; column < cellHorizontally; column++) {
+            for (int row = 0; row < cellVertically; row++) {
+                generation[column][row] = new Cell();
             }
         }
     }

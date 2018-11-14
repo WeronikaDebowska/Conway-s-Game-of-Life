@@ -1,79 +1,59 @@
-package main.java.gameOfLife.Controller;
+package gameOfLife.Controller;
 
-import main.java.gameOfLife.Model.BoardCreator;
-import main.java.gameOfLife.Model.Cell;
-import main.java.gameOfLife.Model.CellState;
+import gameOfLife.Model.Board;
+import gameOfLife.Model.Cell;
+import gameOfLife.Model.CellState;
 
 public class Game {
 
-    private BoardCreator currentGeneration;
+    private Board currentGeneration;
     private Cell[] neighbours = new Cell[8];
 
-    public Game(BoardCreator currentGeneration) {
+
+    public Game(Board currentGeneration) {
         this.currentGeneration = currentGeneration;
+        findAllCellsNeighbours();
     }
 
-    private Cell[] findNeighbours(int cellCoX, int cellCoY) {
-        int index = 0;
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                if (!(i == 0 && j == 0)) {
-                    neighbours[index] = currentGeneration.getGeneration()[cellCoX + i][cellCoY + j];
-                    index++;
-                }
-            }
-        }
-        return neighbours;
-    }
-
-    private void updateCellStatus(int cellCoX, int cellCoY) {
-
-        Cell[] neighbours = findNeighbours(cellCoX, cellCoY);
-        Cell cell = currentGeneration.getGeneration()[cellCoX][cellCoY];
-
-        boolean cellIsAlive = cell.getActualCellState().equals(CellState.ALIVE);
-        int aliveNeighboursCount = 0;
-
-        for (Cell neighbourCell : neighbours) {
-            if (neighbourCell.getActualCellState().equals(CellState.ALIVE)) {
-                aliveNeighboursCount++;
-            }
-        }
-
-        if ((cellIsAlive && (aliveNeighboursCount == 2 || aliveNeighboursCount == 3))) {
-            cell.setFutureCellState(CellState.ALIVE);
-        } else if (!cellIsAlive && aliveNeighboursCount == 3) {
-            cell.setFutureCellState(CellState.ALIVE);
-        } else {
-            cell.setFutureCellState(CellState.DEAD);
-            if (cell.getActualCellState().equals(CellState.ALIVE)) {
+    private void findAllCellsNeighbours() {
+        for (int column = 1; column < currentGeneration.getGeneration().length - 1; column++) {
+            for (int row = 1; row < currentGeneration.getGeneration()[column].length - 1; row++) {
+                findCellsNeighbours(column, row);
             }
         }
     }
 
-    public BoardCreator playGame() {
+    private void findCellsNeighbours(int column, int row) {
+        getCell(column, row).setNeighbours(new Cell[]{
+                getCell(column - 1, row - 1), getCell(column - 1, row), getCell(column - 1, row + 1),
+                getCell(column, row - 1), getCell(column, row + 1),
+                getCell(column + 1, row - 1), getCell(column + 1, row), getCell(column + 1, row + 1)
+        });
+    }
+
+
+    public Board playGame() {
 
         for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
             for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
-
-                updateCellStatus(i, j);
+                getCell(i, j).setFutureCellState();
             }
         }
 
         for (int i = currentGeneration.getPadding(); i < currentGeneration.getGeneration().length - currentGeneration.getPadding(); i++) {
             for (int j = currentGeneration.getPadding(); j < currentGeneration.getGeneration()[i].length - currentGeneration.getPadding(); j++) {
 
-//                System.out.println(i + " " + j + " " + currentGeneration.getGeneration()[i][j].getActualCellState());
-                currentGeneration.getGeneration()[i][j].setActualCellState(currentGeneration.getGeneration()[i][j].getFutureCellState());
-                currentGeneration.getGeneration()[i][j].setFutureCellState(CellState.DEAD);
-
-
+                getCell(i, j).setActualCellState(currentGeneration.getGeneration()[i][j].getFutureCellState());
+                getCell(i, j).setFutureCellState(CellState.DEAD);
             }
         }
-//        System.out.println("+++++++++++++++++++++++++++++++++++++++");
+
 
         return currentGeneration;
     }
 
+    private Cell getCell(int column, int row) {
+        return currentGeneration.getGeneration()[column][row];
+    }
 
 }

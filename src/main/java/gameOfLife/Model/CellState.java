@@ -1,4 +1,4 @@
-package main.java.gameOfLife.Model;
+package gameOfLife.Model;
 
 public enum CellState {
     ALIVE,

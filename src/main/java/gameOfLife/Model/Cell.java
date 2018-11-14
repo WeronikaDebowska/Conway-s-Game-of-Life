@@ -1,9 +1,13 @@
-package main.java.gameOfLife.Model;
+package gameOfLife.Model;
 
 public class Cell {
 
     private CellState actualCellState;
     private CellState futureCellState;
+
+    private Cell[] neighbours = new Cell[8];
+
+
 
     Cell() {
         this.actualCellState = CellState.DEAD;
@@ -26,11 +30,39 @@ public class Cell {
         this.futureCellState = futureCellState;
     }
 
+    public void setFutureCellState() {
+
+        boolean cellIsAlive = actualCellState.equals(CellState.ALIVE);
+        int aliveNeighboursCount = 0;
+
+        for (Cell neighbourCell : neighbours) {
+            if (neighbourCell.getActualCellState().equals(CellState.ALIVE)) {
+                aliveNeighboursCount++;
+            }
+        }
+
+        if ((cellIsAlive && (aliveNeighboursCount == 2 || aliveNeighboursCount == 3))) {
+            futureCellState = CellState.ALIVE;
+        } else if (!cellIsAlive && aliveNeighboursCount == 3) {
+            futureCellState = CellState.ALIVE;
+        } else {
+            futureCellState = CellState.DEAD;
+        }
+    }
+
     public void changeActualState() {
         if (actualCellState == CellState.DEAD) {
             actualCellState = CellState.ALIVE;
         } else {
             actualCellState = CellState.DEAD;
         }
+    }
+
+    public Cell[] getNeighbours() {
+        return neighbours;
+    }
+
+    public void setNeighbours(Cell[] neighbours) {
+        this.neighbours = neighbours;
     }
 }
