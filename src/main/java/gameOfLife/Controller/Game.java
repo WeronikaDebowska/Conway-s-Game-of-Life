@@ -4,6 +4,10 @@ import gameOfLife.Model.Board;
 import gameOfLife.Model.Cell;
 import gameOfLife.Model.CellState;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 public class Game {
 
     private Board currentGeneration;
@@ -11,52 +15,55 @@ public class Game {
     private int numberOfRows;
     private int numberOfColumns;
 
+    private static Set<Cell> cellsToBeCheckedInThisGeneration = new HashSet<>();
+    private static Set<Cell> cellsToBeCheckedInNextGeneration = new HashSet<>();
 
     public Game(Board generation) {
         currentGeneration = generation;
         numberOfRows = currentGeneration.getNumberOfRows();
         numberOfColumns = currentGeneration.getNumberOfColumns();
-        findAllCellsNeighbours();
     }
 
-    private void findAllCellsNeighbours() {
-
-        for (int row = 1; row < numberOfRows - 1; row++) {
-            for (int column = 1; column < numberOfColumns - 1; column++) {
-                findCellsNeighbours(row, column);
-            }
-        }
-    }
-
-    private void findCellsNeighbours(int row, int column) {
-        getCell(row, column).setNeighbours(new Cell[]{
-                getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
-                getCell(row, column - 1), getCell(row, column + 1),
-                getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
-        });
-    }
-
-
-    public Board playGame() {
-
-        for (int row = 1; row < numberOfRows - 1; row++) {      //omitting edges
-            for (int column = 1; column < numberOfColumns - 1; column++) {
-                getCell(row, column).setFutureCellState();
-            }
-        }
-
-        for (int row = 1; row < numberOfRows - 1; row++) {
-            for (int column = 1; column < numberOfColumns - 1; column++) {
-
-                getCell(row, column).setActualCellState(getCell(row, column).getFutureCellState());
-                getCell(row, column).setFutureCellState(CellState.DEAD);
-            }
-        }
-        return currentGeneration;
+    public static Set<Cell> getCellsToBeCheckedInThisGeneration() {
+        return cellsToBeCheckedInThisGeneration;
     }
 
     private Cell getCell(int row, int column) {
         return currentGeneration.getCell(row, column);
+    }
+
+    public static Set<Cell> getCellsToBeCheckedInNextGeneration() {
+        return cellsToBeCheckedInNextGeneration;
+    }
+
+    public Board playGame() {
+
+        for (Cell cellToBeChecked : cellsToBeCheckedInThisGeneration) {
+            cellToBeChecked.setFutureCellState();
+            if (cellToBeChecked.stateChanges()) {
+                cellToBeChecked.notifyAllCellsObserving();
+            }
+        }
+
+        for (Cell cellToBeChecked : cellsToBeCheckedInThisGeneration) {
+            cellToBeChecked.setActualCellState(cellToBeChecked.getFutureCellState());
+            cellToBeChecked.setFutureCellState(CellState.DEAD);
+        }
+
+        cellsToBeCheckedInThisGeneration.clear();
+        cellsToBeCheckedInThisGeneration.addAll(cellsToBeCheckedInNextGeneration);
+
+        cellsToBeCheckedInNextGeneration.clear();
+
+        return currentGeneration;
+    }
+
+    public Set<Cell> getCellsToBeChecked() {
+        return cellsToBeCheckedInThisGeneration;
+    }
+
+    public void setCellsToBeChecked(Set<Cell> cellsToBeChecked) {
+        this.cellsToBeCheckedInThisGeneration = cellsToBeChecked;
     }
 
 }

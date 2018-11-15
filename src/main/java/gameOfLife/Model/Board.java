@@ -1,10 +1,15 @@
 package gameOfLife.Model;
 
+import java.util.LinkedList;
+
 public class Board {
 
     private int numberOfRows;
     private int numberOfColumns;
+
     private Cell[][] generation;
+
+//    private LinkedList<Cell> cellsToBeChecked = new LinkedList<>();
 
     public Board(int numberOfRows, int numberOfColumns) {
 
@@ -13,6 +18,8 @@ public class Board {
 
         generation = new Cell[numberOfRows][numberOfColumns];
         createBoard();
+        findAllCellsNeighbours();
+        setObserversOnNeighbours();
     }
 
     private void createBoard() {
@@ -22,6 +29,43 @@ public class Board {
             }
         }
     }
+
+    private void findAllCellsNeighbours() {
+
+        for (int row = 1; row < numberOfRows - 1; row++) {
+            for (int column = 1; column < numberOfColumns - 1; column++) {
+                findCellsNeighbours(row, column);
+            }
+        }
+    }
+
+    private void findCellsNeighbours(int row, int column) {
+        getCell(row, column).setNeighbours(new Cell[]{
+                getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
+                getCell(row, column - 1), getCell(row, column + 1),
+                getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
+        });
+    }
+
+    private void setObserversOnNeighbours() {
+
+        for (int row = 1; row < numberOfRows - 1; row++) {
+            for (int column = 1; column < numberOfColumns - 1; column++) {
+                addCellAsNeighboursObserver(row, column);
+            }
+        }
+    }
+
+    private void addCellAsNeighboursObserver(int row, int column) {
+
+        Cell observerToBe = getCell(row, column);
+
+        for (Cell neighbour : observerToBe.getNeighbours()) {
+            neighbour.addObserver(observerToBe);
+        }
+    }
+
+
 
     public Cell[][] getGeneration() {
         return generation;

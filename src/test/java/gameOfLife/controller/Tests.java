@@ -17,8 +17,8 @@ public class Tests {
         //create 7x7 board to test on
         Board testingBoard = new Board(7, 7);
 
-        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].bringToLife();
+        testingBoard.getGeneration()[3][2].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);
@@ -37,9 +37,9 @@ public class Tests {
         //create 7x7 board to test on
         Board testingBoard = new Board(7, 7);
 
-        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].bringToLife();
+        testingBoard.getGeneration()[3][1].bringToLife();
+        testingBoard.getGeneration()[3][2].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);
@@ -60,11 +60,11 @@ public class Tests {
         //create 7x7 board to test on
         Board testingBoard = new Board(7, 7);
 
-        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);      // the cell should die
-        testingBoard.getGeneration()[4][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][3].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].bringToLife();
+        testingBoard.getGeneration()[3][2].bringToLife();    // the cell should die
+        testingBoard.getGeneration()[4][2].bringToLife();
+        testingBoard.getGeneration()[3][3].bringToLife();
+        testingBoard.getGeneration()[3][1].bringToLife();
 
 
         //perform next generation
@@ -84,10 +84,10 @@ public class Tests {
         //create 7x7 board to test on
         Board testingBoard = new Board(7, 7);
 
-        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][2].setActualCellState(CellState.DEAD);      // the cell become alive
-        testingBoard.getGeneration()[4][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][3].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][2].bringToLife();
+//        testingBoard.getGeneration()[3][2]     the cell become alive
+        testingBoard.getGeneration()[4][2].bringToLife();
+        testingBoard.getGeneration()[3][3].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);
@@ -110,9 +110,9 @@ public class Tests {
 
         //set blinker pattern i.e. 3 cells in a row alive
 
-        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[2][3].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].bringToLife();
+        testingBoard.getGeneration()[2][2].bringToLife();
+        testingBoard.getGeneration()[2][3].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);
@@ -143,10 +143,10 @@ public class Tests {
 
         //set block pattern i.e. 4 cells in square's corners alive
 
-        testingBoard.getGeneration()[2][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[2][2].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][1].setActualCellState(CellState.ALIVE);
-        testingBoard.getGeneration()[3][2].setActualCellState(CellState.ALIVE);
+        testingBoard.getGeneration()[2][1].bringToLife();
+        testingBoard.getGeneration()[2][2].bringToLife();
+        testingBoard.getGeneration()[3][1].bringToLife();
+        testingBoard.getGeneration()[3][2].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);

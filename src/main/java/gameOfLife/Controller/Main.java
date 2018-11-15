@@ -15,11 +15,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        final int WIDTH = 1400;             //window width
-        final int HEIGHT = 800;             //window height
+        final int WIDTH = 700;             //window width
+        final int HEIGHT = 400;             //window height
 
-        final int NUMBER_OF_ROWS = 50;
-        final int NUMBER_OF_COLUMNS = 100;
+        final int NUMBER_OF_ROWS = 40;
+        final int NUMBER_OF_COLUMNS = 70;
 
 
         Board initialBoard = new Board(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);

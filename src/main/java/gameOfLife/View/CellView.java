@@ -1,5 +1,7 @@
 package gameOfLife.View;
 
+import gameOfLife.Controller.Game;
+import gameOfLife.Model.Board;
 import gameOfLife.Model.Cell;
 import gameOfLife.Model.CellState;
 import javafx.scene.paint.Color;
@@ -17,7 +19,7 @@ class CellView extends Rectangle {
         this.updateCellColor(cell);
 
         this.setOnMouseClicked(lambda -> {
-            cell.changeActualState();
+            cell.bringToLife();
             updateCellColor(cell);
         });
     }
