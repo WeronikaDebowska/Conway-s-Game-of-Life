@@ -9,7 +9,7 @@ class CellView extends Rectangle {
 
     CellView(Cell cell) {
 
-        double SIZE = 10;
+        double SIZE = 9;
 
         this.setHeight(SIZE);
         this.setWidth(SIZE);

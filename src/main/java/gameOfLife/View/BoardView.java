@@ -21,7 +21,7 @@ public class BoardView extends GridPane {
         int numberOfRows = gameBoard.getNumberOfRows();
         int numberOfColumns = gameBoard.getNumberOfColumns();
 
-        final int PADDING = 2;  //size of invisible rows and columns od board
+        final int PADDING = 0;  //size of invisible rows and columns od board
 
         for (int row = PADDING; row < numberOfRows - PADDING; row++) {
             for (int column = PADDING; column < numberOfColumns - PADDING; column++) {
