@@ -15,10 +15,10 @@ public class Tests {
     void willAliveCellDieInUnderpopulationArea() {
 
         //create 7x7 board to test on
-        Board testingBoard = new Board(7, 7);
+        Board testingBoard = new Board(17, 17);
 
-        testingBoard.getGeneration()[2][1].bringToLife();
-        testingBoard.getGeneration()[3][2].bringToLife();
+        testingBoard.getGeneration()[8][11].bringToLife();
+        testingBoard.getGeneration()[8][12].bringToLife();
 
         //perform next generation
         Game game = new Game(testingBoard);

@@ -1,7 +1,5 @@
 package gameOfLife.View;
 
-import gameOfLife.Controller.Game;
-import gameOfLife.Model.Board;
 import gameOfLife.Model.Cell;
 import gameOfLife.Model.CellState;
 import javafx.scene.paint.Color;
@@ -11,7 +9,7 @@ class CellView extends Rectangle {
 
     CellView(Cell cell) {
 
-        double SIZE = 10;
+        double SIZE = 9;
 
         this.setHeight(SIZE);
         this.setWidth(SIZE);

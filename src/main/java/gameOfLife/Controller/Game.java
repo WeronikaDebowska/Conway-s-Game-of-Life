@@ -5,7 +5,6 @@ import gameOfLife.Model.Cell;
 import gameOfLife.Model.CellState;
 
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Set;
 
 public class Game {
@@ -26,10 +25,6 @@ public class Game {
 
     public static Set<Cell> getCellsToBeCheckedInThisGeneration() {
         return cellsToBeCheckedInThisGeneration;
-    }
-
-    private Cell getCell(int row, int column) {
-        return currentGeneration.getCell(row, column);
     }
 
     public static Set<Cell> getCellsToBeCheckedInNextGeneration() {
@@ -58,12 +53,5 @@ public class Game {
         return currentGeneration;
     }
 
-    public Set<Cell> getCellsToBeChecked() {
-        return cellsToBeCheckedInThisGeneration;
-    }
-
-    public void setCellsToBeChecked(Set<Cell> cellsToBeChecked) {
-        this.cellsToBeCheckedInThisGeneration = cellsToBeChecked;
-    }
 
 }
