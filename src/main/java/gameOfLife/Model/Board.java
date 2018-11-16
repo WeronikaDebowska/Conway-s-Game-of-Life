@@ -38,62 +38,34 @@ public class Board {
 
     private void findCellsNeighbours(int row, int column) {
 
+        int[][] neighboursRelativeIndicesArray = new int[][]{{-1, -1}, {-1, 0}, {-1, 1},
+                {0, -1}, {0, 1},
+                {1, -1}, {1, 0}, {1, 1}};
 
-        if (row == 0 && column == 0) {                           //upper left corner
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(numberOfRows - 1, numberOfColumns - 1), getCell(numberOfRows - 1, column), getCell(numberOfRows - 1, column + 1),
-                    getCell(row, numberOfColumns - 1), getCell(row, column + 1),
-                    getCell(row + 1, numberOfColumns - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
-            });
-        } else if (row == 0 && column == numberOfColumns - 1) {   // upper right corner
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(numberOfRows - 1, column - 1), getCell(numberOfRows - 1, column), getCell(numberOfRows - 1, 0),
-                    getCell(row, column - 1), getCell(row, 0),
-                    getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, 0)
-            });
-        } else if (row == numberOfRows - 1 && column == 0) {         //down left corner
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, numberOfColumns - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
-                    getCell(row, numberOfColumns - 1), getCell(row, column + 1),
-                    getCell(0, numberOfColumns - 1), getCell(0, column), getCell(0, column + 1)
-            });
-        } else if (row == numberOfRows - 1 && column == numberOfColumns - 1) {     //down right corner
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, numberOfColumns - 1), getCell(row - 1, column), getCell(row - 1, 0),
-                    getCell(row, numberOfColumns - 1), getCell(row, 0),
-                    getCell(0, numberOfColumns - 1), getCell(0, column), getCell(0, 0)
-            });
-        } else if (row == 0) {                                   // upper edge
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(numberOfRows - 1, column - 1), getCell(numberOfRows - 1, column), getCell(numberOfRows - 1, column + 1),
-                    getCell(row, column - 1), getCell(row, column + 1),
-                    getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
-            });
-        } else if (row == numberOfRows - 1) {                    // down edge
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
-                    getCell(row, column - 1), getCell(row, column + 1),
-                    getCell(0, column - 1), getCell(0, column), getCell(0, column + 1)
-            });
-        } else if (column == 0) {                                // left edge
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, numberOfColumns - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
-                    getCell(row, numberOfColumns - 1), getCell(row, column + 1),
-                    getCell(row + 1, numberOfColumns - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
-            });
-        } else if (column == numberOfColumns - 1) {                  // right edge
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, 0),
-                    getCell(row, column - 1), getCell(row, 0),
-                    getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, 0)
-            });
-        } else {
-            getCell(row, column).setNeighbours(new Cell[]{
-                    getCell(row - 1, column - 1), getCell(row - 1, column), getCell(row - 1, column + 1),
-                    getCell(row, column - 1), getCell(row, column + 1),
-                    getCell(row + 1, column - 1), getCell(row + 1, column), getCell(row + 1, column + 1)
-            });
+        int indexInNeighboursArray = 0;
+        int neighbourRow;
+        int neighbourColumn;
+
+        for (int[] indices : neighboursRelativeIndicesArray) {
+            neighbourRow = row + indices[0];
+            neighbourColumn = column + indices[1];
+
+            if (neighbourRow == -1) {
+                neighbourRow = numberOfRows - 1;
+            } else if (neighbourRow == numberOfRows) {
+                neighbourRow = 0;
+            }
+            if (neighbourColumn == -1) {
+                neighbourColumn = numberOfColumns - 1;
+            } else if (neighbourColumn == numberOfColumns) {
+                neighbourColumn = 0;
+            }
+
+            getCell(row, column).setNeighbour(getCell(neighbourRow, neighbourColumn), indexInNeighboursArray);
+
+            indexInNeighboursArray++;
         }
+
     }
 
     private void setObserversOnNeighbours() {

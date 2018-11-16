@@ -50,8 +50,6 @@ public class Cell extends Observable implements Observer {
             futureCellState = CellState.ALIVE;
         } else if (!cellIsAlive && aliveNeighboursCount == 3) {
             futureCellState = CellState.ALIVE;
-        } else if (!cellIsAlive && aliveNeighboursCount != 3) {
-            futureCellState = CellState.DEAD;
         } else {
             futureCellState = CellState.DEAD;
         }
@@ -90,6 +88,10 @@ public class Cell extends Observable implements Observer {
 
     public void setNeighbours(Cell[] neighbours) {
         this.neighbours = neighbours;
+    }
+
+    public void setNeighbour(Cell neighbour, int index) {
+        neighbours[index] = neighbour;
     }
 
     @Override

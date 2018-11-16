@@ -14,7 +14,7 @@ public class Game {
     private int numberOfRows;
     private int numberOfColumns;
 
-    private static Set<Cell> cellsToBeCheckedInThisGeneration = new HashSet<>();
+    private static Set<Cell> cellsToBeCheckedInThisGeneration = new HashSet<>();    //TODO do it not static
     private static Set<Cell> cellsToBeCheckedInNextGeneration = new HashSet<>();
 
     public Game(Board generation) {
