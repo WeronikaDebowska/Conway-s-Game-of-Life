@@ -12,6 +12,8 @@ public class Cell extends Observable implements Observer {
 
     private Cell[] neighbours = new Cell[8];
 
+    private Game game;
+
 
     Cell() {
         actualCellState = CellState.DEAD;
@@ -76,9 +78,9 @@ public class Cell extends Observable implements Observer {
 
     public void bringToLife() {
         changeActualState();
-        Game.getCellsToBeCheckedInThisGeneration().add(this);
+        game.getCellsToBeCheckedInThisGeneration().add(this);
         for (Cell clickedCellNeighbour : neighbours) {
-            Game.getCellsToBeCheckedInThisGeneration().add(clickedCellNeighbour);
+            game.getCellsToBeCheckedInThisGeneration().add(clickedCellNeighbour);
         }
     }
 
@@ -94,8 +96,12 @@ public class Cell extends Observable implements Observer {
         neighbours[index] = neighbour;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
-        Game.getCellsToBeCheckedInNextGeneration().add(this);
+        game.getCellsToBeCheckedInNextGeneration().add(this);
     }
 }

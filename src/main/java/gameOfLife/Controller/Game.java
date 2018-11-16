@@ -14,20 +14,21 @@ public class Game {
     private int numberOfRows;
     private int numberOfColumns;
 
-    private static Set<Cell> cellsToBeCheckedInThisGeneration = new HashSet<>();    //TODO do it not static
-    private static Set<Cell> cellsToBeCheckedInNextGeneration = new HashSet<>();
+    private Set<Cell> cellsToBeCheckedInThisGeneration = new HashSet<>();
+    private Set<Cell> cellsToBeCheckedInNextGeneration = new HashSet<>();
 
     public Game(Board generation) {
         currentGeneration = generation;
         numberOfRows = currentGeneration.getNumberOfRows();
         numberOfColumns = currentGeneration.getNumberOfColumns();
+        attachGameToAllCells();
     }
 
-    public static Set<Cell> getCellsToBeCheckedInThisGeneration() {
+    public Set<Cell> getCellsToBeCheckedInThisGeneration() {
         return cellsToBeCheckedInThisGeneration;
     }
 
-    public static Set<Cell> getCellsToBeCheckedInNextGeneration() {
+    public Set<Cell> getCellsToBeCheckedInNextGeneration() {
         return cellsToBeCheckedInNextGeneration;
     }
 
@@ -51,6 +52,14 @@ public class Game {
         cellsToBeCheckedInNextGeneration.clear();
 
         return currentGeneration;
+    }
+
+    private void attachGameToAllCells() {
+        for (Cell[] cells : currentGeneration.getGeneration()) {
+            for (Cell cell : cells) {
+                cell.setGame(this);
+            }
+        }
     }
 
 
