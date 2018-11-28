@@ -58,6 +58,10 @@ public class Cell {
         }
     }
 
+    public void setNeighbour(Cell neighbour, int index) {
+        neighbours[index] = neighbour;
+    }
+
     public Cell[] getNeighbours() {
         return neighbours;
     }
