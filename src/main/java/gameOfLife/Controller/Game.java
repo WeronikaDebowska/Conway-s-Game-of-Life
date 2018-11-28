@@ -34,24 +34,35 @@ public class Game {
 
     public Board playGame() {
 
-        for (Cell cellToBeChecked : cellsToBeCheckedInThisGeneration) {
-            cellToBeChecked.setFutureCellState();
-            if (cellToBeChecked.stateChanges()) {
-                cellToBeChecked.notifyAllCellsObserving();
-            }
-        }
+        notifyAllNeighboursIfNeeded();
+        changeStateOfAllCheckedCells();
+        cloneList();
 
+        return currentGeneration;
+    }
+
+    private void cloneList() {
+        cellsToBeCheckedInThisGeneration.clear();
+        cellsToBeCheckedInThisGeneration.addAll(cellsToBeCheckedInNextGeneration);
+        cellsToBeCheckedInNextGeneration.clear();
+    }
+
+    private void changeStateOfAllCheckedCells() {
         for (Cell cellToBeChecked : cellsToBeCheckedInThisGeneration) {
             cellToBeChecked.setActualCellState(cellToBeChecked.getFutureCellState());
             cellToBeChecked.setFutureCellState(CellState.DEAD);
+
         }
+    }
 
-        cellsToBeCheckedInThisGeneration.clear();
-        cellsToBeCheckedInThisGeneration.addAll(cellsToBeCheckedInNextGeneration);
-
-        cellsToBeCheckedInNextGeneration.clear();
-
-        return currentGeneration;
+    private void notifyAllNeighboursIfNeeded() {
+        for (Cell cellToBeChecked : cellsToBeCheckedInThisGeneration) {
+            cellToBeChecked.setFutureCellState();
+            if (cellToBeChecked.stateChanges()) {
+                cellToBeChecked.makeAllNeighboursObserveThis();
+                cellToBeChecked.notifyAllCellsObserving();
+            }
+        }
     }
 
     private void attachGameToAllCells() {

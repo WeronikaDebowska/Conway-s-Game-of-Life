@@ -61,7 +61,7 @@ public class Cell extends Observable implements Observer {
         return !(actualCellState.equals(futureCellState));
     }
 
-    public void notifyAllCellsObserving() {
+    public synchronized void notifyAllCellsObserving() {
         setChanged();
         notifyObservers();
         clearChanged();
@@ -88,10 +88,6 @@ public class Cell extends Observable implements Observer {
         return neighbours;
     }
 
-    public void setNeighbours(Cell[] neighbours) {
-        this.neighbours = neighbours;
-    }
-
     public void setNeighbour(Cell neighbour, int index) {
         neighbours[index] = neighbour;
     }
@@ -101,7 +97,24 @@ public class Cell extends Observable implements Observer {
     }
 
     @Override
-    public void update(Observable o, Object arg) {
-        game.getCellsToBeCheckedInNextGeneration().add(this);
+    public void update(Observable observedCell, Object arg) {
+        addCellToToBeCheckedList(this);
+        removeFromObserversList(observedCell, this);
+    }
+
+    private void removeFromObserversList(Observable o, Cell cell) {
+        o.deleteObserver(this);
+    }
+
+    private void addCellToToBeCheckedList(Cell cell) {
+        game.getCellsToBeCheckedInNextGeneration().add(cell);
+    }
+
+
+    public void makeAllNeighboursObserveThis() {
+
+        for (Cell neighbour : neighbours) {
+            this.addObserver(neighbour);
+        }
     }
 }

@@ -27,7 +27,7 @@ public class GameLoop {
         this.game = game;
         this.scene = scene;
         isGamePaused = true;
-        final int INITIAL_PERIOD = 500;
+        final int INITIAL_PERIOD = 100;
         currentPeriod = INITIAL_PERIOD;
         delay = currentPeriod;
     }
@@ -63,8 +63,10 @@ public class GameLoop {
                 if (isGamePaused) {
                     return;
                 }
-                Board nextGeneration = game.playGame();
-                scene.setRoot(new BoardView(nextGeneration));
+                synchronized (this) {
+                    Board nextGeneration = game.playGame();
+                    scene.setRoot(new BoardView(nextGeneration));
+                }
             }
         };
         gameUpdating = scheduler.scheduleAtFixedRate(gameUpdate, delay, currentPeriod, MILLISECONDS);

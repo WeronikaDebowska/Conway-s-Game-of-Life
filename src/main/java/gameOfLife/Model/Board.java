@@ -15,7 +15,6 @@ public class Board {
         generation = new Cell[numberOfRows][numberOfColumns];
         createBoard();
         findAllCellsNeighbours();
-        setObserversOnNeighbours();
     }
 
     private void createBoard() {
@@ -62,30 +61,9 @@ public class Board {
             }
 
             getCell(row, column).setNeighbour(getCell(neighbourRow, neighbourColumn), indexInNeighboursArray);
-
             indexInNeighboursArray++;
         }
-
     }
-
-    private void setObserversOnNeighbours() {
-
-        for (int row = 0; row < numberOfRows; row++) {
-            for (int column = 0; column < numberOfColumns; column++) {
-                addCellAsNeighboursObserver(row, column);
-            }
-        }
-    }
-
-    private void addCellAsNeighboursObserver(int row, int column) {
-
-        Cell observerToBe = getCell(row, column);
-
-        for (Cell neighbour : observerToBe.getNeighbours()) {
-            neighbour.addObserver(observerToBe);
-        }
-    }
-
 
     public Cell[][] getGeneration() {
         return generation;
